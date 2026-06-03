@@ -113,7 +113,7 @@
     .hero {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 7rem 1.4rem 4rem;
+      padding: clamp(3.5rem, 7vw, 5.5rem) 1.4rem 4rem;
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
       align-items: center;
@@ -443,9 +443,8 @@
       }
 
       .hero {
-        padding-top: 5rem;
+        padding-top: clamp(2.8rem, 8vw, 4rem);
       }
-
       .hero-card {
         min-height: 400px;
       }
