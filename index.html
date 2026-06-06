@@ -3,499 +3,589 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Together We Talk is building gentle AI-powered speech practice tools for children, families, therapists, and researchers." />
+  <meta name="description" content="Together We Talk is building gentle AI-powered speech practice companions for children, families, therapists, and researchers." />
   <title>Together We Talk</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/logo.svg" />
   <link rel="shortcut icon" href="/logo.svg" />
 
   <style>
     :root {
-      --text: #111827;
-      --muted: #667085;
-      --soft: #f7f8fb;
-      --soft-2: #eef4ff;
-      --accent: #2563eb;
-      --accent-dark: #1d4ed8;
-      --mint: #dff7ee;
+      --ink: #2e2a3d;
+      --ink-soft: #635d77;
+      --cream: #f6f4ef;
+      --cream-deep: #ece8df;
+      --peach: #f4c9a8;
+      --coral: #6d92a8;
+      --coral-deep: #4f7791;
+      --sky: #9db8c9;
+      --sky-deep: #6d92a8;
+      --teal: #8fbfa9;
+      --teal-deep: #5e9a7e;
+      --lav: #b6a8d4;
+      --sun: #f0c96b;
       --white: #ffffff;
-      --border: rgba(17, 24, 39, 0.09);
-      --shadow: 0 24px 70px rgba(17, 24, 39, 0.08);
-      --radius: 28px;
+      --shadow-soft: 0 18px 50px rgba(46, 42, 61, 0.10);
+      --shadow-pop: 0 24px 60px rgba(79, 119, 145, 0.22);
+      --r-lg: 36px;
+      --r-md: 26px;
+      --r-sm: 18px;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 34rem),
-        radial-gradient(circle at top right, rgba(16, 185, 129, 0.12), transparent 28rem),
-        var(--white);
-      line-height: 1.6;
+      font-family: 'Nunito', system-ui, sans-serif;
+      color: var(--ink);
+      background-color: var(--cream);
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(157, 184, 201, 0.28), transparent 38%),
+        radial-gradient(circle at 88% 4%, rgba(255, 215, 107, 0.30), transparent 34%),
+        radial-gradient(circle at 82% 88%, rgba(79, 209, 197, 0.22), transparent 40%),
+        radial-gradient(circle at 6% 92%, rgba(198, 182, 247, 0.26), transparent 38%);
+      line-height: 1.65;
       overflow-x: hidden;
+      position: relative;
     }
 
-    a {
-      color: inherit;
+    /* dotted paper texture */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(46, 42, 61, 0.05) 1px, transparent 1px);
+      background-size: 26px 26px;
+      pointer-events: none;
+      z-index: 0;
     }
 
+    a { color: inherit; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
+
+    /* ---------- NAV ---------- */
     nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(253, 248, 240, 0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 2px dashed rgba(46, 42, 61, 0.12);
     }
-
     .nav-wrap {
-      max-width: 1120px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: 0.9rem 1.4rem;
+      padding: 0.85rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
     }
-
     .brand {
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      text-decoration: none;
-      font-size: 1.05rem;
-    }
-
-    nav ul {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      list-style: none;
-      gap: 1.4rem;
-    }
-
-    nav a {
+      gap: 0.55rem;
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
       text-decoration: none;
-      color: rgba(17, 24, 39, 0.78);
-      font-size: 0.95rem;
-      font-weight: 600;
+    }
+    .brand-mark {
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(150deg, var(--coral), var(--sun));
+      display: grid; place-items: center;
+      box-shadow: 0 6px 14px rgba(79, 119, 145, 0.3);
+    }
+    .brand-mark svg { width: 20px; height: 20px; }
+    nav ul { display: flex; align-items: center; list-style: none; gap: 1.5rem; }
+    nav a.link {
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--ink-soft);
       transition: color 0.2s ease;
+      position: relative;
     }
-
-    nav a:hover {
-      color: var(--accent);
+    nav a.link::after {
+      content: "";
+      position: absolute; left: 0; bottom: -4px;
+      width: 0; height: 3px; border-radius: 3px;
+      background: var(--coral);
+      transition: width 0.25s ease;
     }
-
+    nav a.link:hover { color: var(--ink); }
+    nav a.link:hover::after { width: 100%; }
     .nav-button {
-      padding: 0.55rem 0.95rem;
+      padding: 0.6rem 1.15rem;
       color: var(--white);
-      background: var(--text);
+      background: var(--ink);
       border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 18px rgba(46, 42, 61, 0.18);
+      transition: transform 0.2s ease, background 0.2s ease;
     }
+    .nav-button:hover { transform: translateY(-2px); background: var(--coral-deep); }
 
-    .nav-button:hover {
-      color: var(--white);
-      background: var(--accent);
-    }
-
+    /* ---------- HERO ---------- */
     .hero {
-      max-width: 1120px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: clamp(3.5rem, 7vw, 5.5rem) 1.4rem 4rem;
+      padding: clamp(2.5rem, 6vw, 5rem) 1.5rem 3rem;
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
+      grid-template-columns: 1.05fr 0.95fr;
       align-items: center;
-      gap: 3rem;
+      gap: 2.5rem;
+      position: relative;
+      z-index: 1;
     }
-
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      margin-bottom: 1.4rem;
-      padding: 0.45rem 0.8rem;
-      color: var(--accent-dark);
-      background: rgba(37, 99, 235, 0.09);
-      border: 1px solid rgba(37, 99, 235, 0.14);
+      gap: 0.5rem;
+      margin-bottom: 1.3rem;
+      padding: 0.45rem 0.95rem;
+      color: var(--coral-deep);
+      background: var(--white);
+      border: 2px solid rgba(79, 119, 145, 0.22);
       border-radius: 999px;
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-
-    .hero h1 {
-      max-width: 790px;
-      font-size: clamp(3rem, 7vw, 6.1rem);
-      line-height: 0.95;
-      letter-spacing: -0.075em;
+      font-size: 0.85rem;
       font-weight: 800;
+      box-shadow: var(--shadow-soft);
     }
-
+    .eyebrow .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--coral);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+    }
+    .hero h1 .scribble {
+      position: relative;
+      color: var(--coral-deep);
+      white-space: nowrap;
+    }
+    .hero h1 .scribble svg {
+      position: absolute;
+      left: -2%;
+      bottom: -0.35em;
+      width: 104%;
+      height: 0.5em;
+      overflow: visible;
+    }
+    .hero h1 .scribble path {
+      stroke-dasharray: 300;
+      stroke-dashoffset: 300;
+      animation: draw 1.2s ease forwards 0.7s;
+    }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
     .hero p {
-      max-width: 620px;
+      max-width: 540px;
       margin-top: 1.5rem;
-      color: var(--muted);
+      color: var(--ink-soft);
       font-size: 1.2rem;
+      font-weight: 500;
     }
-
     .hero-actions {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 2rem;
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 0.9rem; margin-top: 2.1rem;
     }
-
     .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      min-height: 52px; padding: 0.9rem 1.5rem;
+      border-radius: 999px; font-weight: 800; font-size: 1rem;
       text-decoration: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
+    .button:hover { transform: translateY(-3px) rotate(-1deg); }
     .button-primary {
       color: var(--white);
-      background: var(--accent);
-      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.24);
+      background: linear-gradient(145deg, var(--coral), var(--coral-deep));
+      box-shadow: var(--shadow-pop);
     }
-
-    .button-primary:hover {
-      background: var(--accent-dark);
-    }
-
     .button-secondary {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid var(--border);
+      color: var(--ink);
+      background: var(--white);
+      border: 2px solid rgba(46, 42, 61, 0.12);
+      box-shadow: var(--shadow-soft);
     }
+    .trust {
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-top: 2rem; color: var(--ink-soft);
+      font-weight: 700; font-size: 0.92rem;
+    }
+    .trust-faces { display: flex; }
+    .trust-faces span {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 3px solid var(--cream);
+      margin-left: -10px;
+      display: grid; place-items: center; font-size: 1rem;
+    }
+    .trust-faces span:first-child { margin-left: 0; }
 
-    .hero-card {
+    /* ---------- ROBOT COMPANION ---------- */
+    .companion-stage {
       position: relative;
       min-height: 460px;
-      padding: 1.1rem;
-      border-radius: 36px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(247,248,251,0.9));
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 1.1rem;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.72)),
-        radial-gradient(circle at 50% 10%, var(--mint), transparent 14rem),
-        linear-gradient(135deg, #eef4ff, #ffffff);
-      border: 1px solid var(--border);
-    }
-
-    .robot-orb {
-      position: absolute;
-      left: 50%;
-      top: 44%;
-      width: 240px;
-      height: 240px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 38% 30%, #ffffff 0 10%, transparent 11%),
-        linear-gradient(145deg, #ffffff, #dde8ff);
-      border: 1px solid rgba(37, 99, 235, 0.14);
-      box-shadow: inset -18px -18px 46px rgba(37, 99, 235, 0.12), 0 28px 52px rgba(17, 24, 39, 0.12);
-    }
-
-    .face {
-      position: absolute;
-      left: 50%;
-      top: 47%;
-      width: 134px;
-      height: 72px;
-      transform: translate(-50%, -50%);
-      border-radius: 38px;
-      background: #111827;
-      box-shadow: 0 16px 38px rgba(17, 24, 39, 0.2);
-    }
-
-    .face::before,
-    .face::after {
-      content: "";
-      position: absolute;
-      top: 25px;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      background: #93c5fd;
-    }
-
-    .face::before { left: 37px; }
-    .face::after { right: 37px; }
-
-    .speech-card {
-      position: absolute;
-      left: 1.7rem;
-      right: 1.7rem;
-      bottom: 1.7rem;
-      padding: 1.15rem;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.86);
-      border: 1px solid var(--border);
-      box-shadow: 0 18px 44px rgba(17, 24, 39, 0.08);
-    }
-
-    .speech-card small {
-      display: block;
-      color: var(--muted);
-      font-weight: 700;
-      margin-bottom: 0.35rem;
-    }
-
-    .speech-card strong {
-      display: block;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
-    }
-
-    main {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 2rem 1.4rem 5rem;
-    }
-
-    section {
-      margin: 2rem 0;
-    }
-
-    .section-heading {
-      max-width: 760px;
-      margin-bottom: 1.6rem;
-    }
-
-    .section-heading h2 {
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      line-height: 1.05;
-      letter-spacing: -0.055em;
-      margin-bottom: 0.9rem;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
-
-    .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      place-items: center;
     }
-
-    .card {
-      padding: 1.5rem;
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid var(--border);
-      box-shadow: 0 18px 50px rgba(17, 24, 39, 0.05);
+    .blob {
+      position: absolute;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle at 35% 30%, var(--white), var(--sky) 70%, var(--sky-deep));
+      border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
+      box-shadow: var(--shadow-soft);
+      animation: morph 9s ease-in-out infinite;
+      opacity: 0.55;
     }
-
-    .card span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      margin-bottom: 1.1rem;
-      border-radius: 14px;
-      background: var(--soft-2);
-      color: var(--accent-dark);
-      font-weight: 800;
+    @keyframes morph {
+      0%, 100% { border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; transform: rotate(0deg); }
+      50% { border-radius: 58% 42% 44% 56% / 46% 58% 42% 54%; transform: rotate(8deg); }
     }
-
-    .card h3 {
-      font-size: 1.18rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.025em;
-    }
-
-    .card p {
-      color: var(--muted);
-    }
-
-    .feature {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      align-items: center;
-      gap: 1.5rem;
-      padding: 1.2rem;
-      border-radius: 34px;
-      background: var(--text);
-      color: var(--white);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .feature-copy {
-      padding: 2rem;
-    }
-
-    .feature-copy h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.05;
-      letter-spacing: -0.055em;
-      margin-bottom: 1rem;
-    }
-
-    .feature-copy p {
-      color: rgba(255, 255, 255, 0.72);
-      font-size: 1.08rem;
-    }
-
-    .video-shell {
+    .robot {
       position: relative;
-      width: 100%;
-      max-width: 365px;
+      width: 240px;
+      animation: float 5s ease-in-out infinite;
+      z-index: 2;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+    .robot-body {
+      width: 210px; height: 200px;
       margin: 0 auto;
-      aspect-ratio: 9 / 16;
+      background: linear-gradient(160deg, #ffffff, #eaf3ff);
+      border: 4px solid var(--ink);
+      border-radius: 60px 60px 52px 52px;
+      position: relative;
+      box-shadow: inset -10px -12px 0 rgba(157, 184, 201, 0.25), var(--shadow-soft);
+    }
+    .antenna {
+      position: absolute; left: 50%; top: -34px;
+      width: 4px; height: 30px;
+      background: var(--ink);
+      transform: translateX(-50%);
+    }
+    .antenna::after {
+      content: ""; position: absolute; top: -12px; left: 50%;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--coral);
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 4px rgba(109, 146, 168, 0.3);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .robot-face {
+      position: absolute; left: 50%; top: 38px;
+      transform: translateX(-50%);
+      width: 150px; height: 92px;
+      background: var(--ink);
       border-radius: 30px;
-      overflow: hidden;
-      background: #000;
-      border: 10px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.32);
+      display: flex; align-items: center; justify-content: center;
+      gap: 22px;
     }
-
-    .video-shell iframe {
+    .eye {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--sky);
+      box-shadow: 0 0 14px rgba(142, 197, 255, 0.9);
+      animation: blink 4s infinite;
+    }
+    @keyframes blink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.1); }
+    }
+    .cheek {
+      position: absolute; bottom: 26px;
+      width: 18px; height: 10px; border-radius: 50%;
+      background: rgba(109, 146, 168, 0.55);
+    }
+    .cheek.l { left: 26px; }
+    .cheek.r { right: 26px; }
+    .robot-ear {
+      position: absolute; top: 60px;
+      width: 18px; height: 44px;
+      background: var(--coral);
+      border: 4px solid var(--ink);
+      border-radius: 12px;
+    }
+    .robot-ear.l { left: -14px; }
+    .robot-ear.r { right: -14px; }
+    /* floating speech bubbles */
+    .bubble {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+      padding: 0.55rem 0.95rem;
+      background: var(--white);
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: var(--shadow-soft);
+      z-index: 3;
+      white-space: nowrap;
+    }
+    .bubble::after {
+      content: ""; position: absolute; bottom: -10px; left: 22px;
+      width: 14px; height: 14px;
+      background: var(--white);
+      border-right: 3px solid var(--ink);
+      border-bottom: 3px solid var(--ink);
+      transform: rotate(45deg);
+    }
+    .bubble.one { top: 8%; left: -4%; color: var(--coral-deep); animation: floatB 4.5s ease-in-out infinite; }
+    .bubble.two { top: 34%; right: -8%; color: var(--sky-deep); animation: floatB 5.5s ease-in-out infinite 0.6s; }
+    .bubble.three { bottom: 6%; left: 2%; color: var(--teal-deep); animation: floatB 5s ease-in-out infinite 1.2s; }
+    @keyframes floatB {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
     }
 
-    .contact {
-      margin-top: 3rem;
-      padding: clamp(2rem, 5vw, 4rem);
-      text-align: center;
-      border-radius: 34px;
-      background:
-        radial-gradient(circle at top, rgba(37, 99, 235, 0.14), transparent 28rem),
-        linear-gradient(145deg, #ffffff, #f7f8fb);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
+    /* ---------- SECTIONS ---------- */
+    main { position: relative; z-index: 1; }
+    section { padding: 3.5rem 0; }
+    .section-heading { max-width: 720px; margin-bottom: 2.2rem; }
+    .kicker {
+      display: inline-block;
+      font-weight: 800; font-size: 0.85rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--coral-deep);
+      margin-bottom: 0.8rem;
     }
-
-    .contact h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
+    .section-heading h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 4.5vw, 3.3rem);
       line-height: 1.05;
-      letter-spacing: -0.055em;
+      letter-spacing: -0.025em;
       margin-bottom: 0.9rem;
     }
+    .section-heading p { color: var(--ink-soft); font-size: 1.12rem; font-weight: 500; }
 
-    .contact p {
-      max-width: 670px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: 1.08rem;
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+    .card {
+      padding: 1.8rem;
+      border-radius: var(--r-md);
+      background: var(--white);
+      border: 3px solid var(--ink);
+      box-shadow: 8px 8px 0 rgba(46, 42, 61, 0.10);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
+    .card:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0 rgba(79, 119, 145,0.22); }
+    .card .icon {
+      width: 56px; height: 56px;
+      margin-bottom: 1.2rem;
+      border-radius: 18px;
+      display: grid; place-items: center;
+      border: 3px solid var(--ink);
+    }
+    .card:nth-child(1) .icon { background: var(--peach); }
+    .card:nth-child(2) .icon { background: var(--sky); }
+    .card:nth-child(3) .icon { background: var(--teal); }
+    .card .icon svg { width: 28px; height: 28px; }
+    .card h3 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+    .card p { color: var(--ink-soft); font-weight: 500; }
+
+    /* problem — storybook panel */
+    .panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2.5rem;
+      padding: clamp(1.8rem, 4vw, 3rem);
+      border-radius: var(--r-lg);
+      background: linear-gradient(150deg, var(--ink), #3b3457);
+      color: var(--white);
+      border: 4px solid var(--ink);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative;
+    }
+    .panel::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    .panel-copy { position: relative; z-index: 1; }
+    .panel-copy .kicker { color: var(--sun); }
+    .panel-copy h2 {
+      font-family: 'Fraunces', serif; font-weight: 900;
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    .panel-copy p { color: rgba(255,255,255,0.78); font-size: 1.1rem; font-weight: 500; }
+    .timeline {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .t-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: rgba(255,255,255,0.07);
+      border: 2px solid rgba(255,255,255,0.12);
+      border-radius: var(--r-sm);
+    }
+    .t-dot {
+      flex-shrink: 0;
+      width: 44px; height: 44px; border-radius: 14px;
+      display: grid; place-items: center; font-size: 1.4rem;
+    }
+    .t-row:nth-child(1) .t-dot { background: var(--teal); }
+    .t-row:nth-child(2) .t-dot { background: rgba(255,255,255,0.12); }
+    .t-row:nth-child(3) .t-dot { background: var(--coral); }
+    .t-row strong { display: block; font-family: 'Fraunces', serif; font-size: 1.05rem; }
+    .t-row span { color: rgba(255,255,255,0.62); font-size: 0.92rem; font-weight: 600; }
+    .t-row.gap strong { color: var(--sun); }
+
+    /* idea — feature split */
+    .idea-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .idea-art {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: var(--r-lg);
+      background:
+        radial-gradient(circle at 30% 25%, var(--sun), transparent 45%),
+        radial-gradient(circle at 75% 70%, var(--teal), transparent 50%),
+        linear-gradient(150deg, var(--lav), var(--sky));
+      border: 4px solid var(--ink);
+      box-shadow: 10px 10px 0 rgba(46, 42, 61,0.12);
+      display: grid; place-items: center;
+      overflow: hidden;
+    }
+    .idea-art .mini-robot {
+      width: 120px; height: 120px;
+      background: var(--white);
+      border: 4px solid var(--ink);
+      border-radius: 36px;
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+    }
+    .idea-art .mini-robot::before,
+    .idea-art .mini-robot::after {
+      content: ""; position: absolute; top: 42px;
+      width: 18px; height: 18px; border-radius: 50%; background: var(--ink);
+    }
+    .idea-art .mini-robot::before { left: 28px; }
+    .idea-art .mini-robot::after { right: 28px; }
+    .idea-art .ring {
+      position: absolute; border: 3px dashed rgba(255,255,255,0.6);
+      border-radius: 50%;
+    }
+    .idea-art .ring.a { width: 220px; height: 220px; animation: spin 18s linear infinite; }
+    .idea-art .ring.b { width: 300px; height: 300px; animation: spin 26s linear infinite reverse; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .feature-list { list-style: none; margin-top: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
+    .feature-list li { display: flex; gap: 0.9rem; align-items: flex-start; font-weight: 600; color: var(--ink-soft); }
+    .feature-list .check {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 9px;
+      background: var(--teal); border: 2px solid var(--ink);
+      display: grid; place-items: center; color: var(--ink); font-weight: 900;
+    }
+    .feature-list strong { color: var(--ink); }
+
+    /* demo */
+    .demo {
+      display: grid; grid-template-columns: 1fr 0.85fr;
+      gap: 2.5rem; align-items: center;
+      padding: clamp(1.8rem, 4vw, 3rem);
+      border-radius: var(--r-lg);
+      background: var(--white);
+      border: 4px solid var(--ink);
+      box-shadow: 10px 10px 0 rgba(109, 146, 168, 0.22);
+    }
+    .demo h2 { font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(1.9rem, 4vw, 2.9rem); line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 0.9rem; }
+    .demo p { color: var(--ink-soft); font-size: 1.1rem; font-weight: 500; margin-bottom: 1.5rem; }
+    .video-shell {
+      position: relative; width: 100%; max-width: 320px; margin: 0 auto;
+      aspect-ratio: 9 / 16; border-radius: 28px; overflow: hidden;
+      background: #000;
+      border: 5px solid var(--ink);
+      box-shadow: 0 20px 50px rgba(46, 42, 61,0.25);
+      transform: rotate(2deg);
+    }
+    .video-shell iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    /* contact */
+    .contact {
+      margin-top: 1rem;
+      padding: clamp(2.4rem, 5vw, 4.5rem) 1.5rem;
+      text-align: center;
+      border-radius: var(--r-lg);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 215, 107, 0.4), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(79, 209, 197, 0.35), transparent 45%),
+        linear-gradient(150deg, var(--peach), var(--coral));
+      border: 4px solid var(--ink);
+      box-shadow: 12px 12px 0 rgba(46, 42, 61,0.14);
+      position: relative; overflow: hidden;
+    }
+    .contact h2 {
+      font-family: 'Fraunces', serif; font-weight: 900;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 0.9rem;
+      color: var(--ink);
+    }
+    .contact p { max-width: 600px; margin: 0 auto 1.8rem; color: var(--ink); font-weight: 600; font-size: 1.12rem; }
+    .contact .button-primary { background: var(--ink); box-shadow: 0 14px 30px rgba(46, 42, 61,0.3); }
 
     footer {
-      padding: 2rem 1.4rem 3rem;
+      padding: 2.5rem 1.5rem 3rem;
       text-align: center;
-      color: var(--muted);
+      color: var(--ink-soft);
+      font-weight: 600;
       font-size: 0.95rem;
+      position: relative; z-index: 1;
     }
+    footer .brand { justify-content: center; margin-bottom: 0.6rem; }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 900px) {
-      .hero,
-      .feature {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: clamp(2.8rem, 8vw, 4rem);
-      }
-      .hero-card {
-        min-height: 400px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
+      .hero, .panel, .idea-split, .demo { grid-template-columns: 1fr; }
+      .companion-stage { min-height: 380px; order: -1; }
+      .grid { grid-template-columns: 1fr; }
+      .video-shell { transform: none; }
+      .idea-art { max-width: 360px; margin: 0 auto; width: 100%; }
     }
-
     @media (max-width: 640px) {
-      .nav-wrap {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      nav ul {
-        width: 100%;
-        justify-content: flex-start;
-        gap: 0.8rem;
-        overflow-x: auto;
-        padding-bottom: 0.2rem;
-      }
-
-      .nav-button {
-        display: none;
-      }
-
-      .hero-actions {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .button {
-        width: 100%;
-      }
-
-      .feature-copy {
-        padding: 1.2rem;
-      }
+      nav ul .link { display: none; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .button { width: 100%; }
+      .bubble { font-size: 0.85rem; padding: 0.4rem 0.7rem; }
     }
   </style>
 </head>
 <body>
   <nav>
     <div class="nav-wrap">
-      <a class="brand" href="#top">Together We Talk</a>
+      <a class="brand" href="#top">
+        <span class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </span>
+        Together We Talk
+      </a>
       <ul aria-label="Primary navigation">
-        <li><a href="#mission">Mission</a></li>
-        <li><a href="#problem">Problem</a></li>
-        <li><a href="#idea">The Idea</a></li>
-        <li><a href="#demo">Demo</a></li>
+        <li><a class="link" href="#mission">Mission</a></li>
+        <li><a class="link" href="#problem">The Gap</a></li>
+        <li><a class="link" href="#idea">The Companion</a></li>
+        <li><a class="link" href="#demo">Demo</a></li>
         <li><a class="nav-button" href="#contact">Connect</a></li>
       </ul>
     </div>
@@ -503,127 +593,212 @@
 
   <header id="top" class="hero">
     <div class="hero-copy reveal">
-      <div class="eyebrow">Speech practice, made warmer</div>
-      <h1>Helping children find their voice between therapy sessions.</h1>
+      <div class="eyebrow"><span class="dot"></span> Speech practice, made warmer</div>
+      <h1>Helping children find their
+        <span class="scribble">voice<svg viewBox="0 0 200 20" preserveAspectRatio="none"><path d="M3 14 C40 4, 90 4, 130 11 S185 16, 197 7" fill="none" stroke="#6d92a8" stroke-width="6" stroke-linecap="round"/></svg></span>
+        between sessions.</h1>
       <p>
-        Together We Talk is building gentle, AI-powered tools that help children practice speech,
-        build confidence, and connect what they learn in therapy to everyday life.
+        Together We Talk is building a gentle, AI-powered companion that helps children practice
+        speech, build confidence, and carry what they learn in therapy into everyday life.
       </p>
       <div class="hero-actions">
-        <a class="button button-primary" href="#demo">Watch the idea</a>
+        <a class="button button-primary" href="#demo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Watch the idea
+        </a>
         <a class="button button-secondary" href="#contact">Start a conversation</a>
+      </div>
+      <div class="trust">
+        <div class="trust-faces">
+          <span style="background:var(--peach)">👧</span>
+          <span style="background:var(--sky)">👦</span>
+          <span style="background:var(--teal)">🧑‍⚕️</span>
+          <span style="background:var(--lav)">👪</span>
+        </div>
+        Built with families, therapists &amp; researchers
       </div>
     </div>
 
-    <div class="hero-card reveal" aria-label="Friendly robot illustration">
-      <div class="robot-orb"></div>
-      <div class="face"></div>
-      <div class="speech-card">
-        <small>Daily practice prompt</small>
-        <strong>“Let’s say it together — one small win at a time.”</strong>
+    <div class="companion-stage reveal" aria-label="Friendly robot companion">
+      <div class="blob"></div>
+      <div class="bubble one">Aa&hellip;</div>
+      <div class="bubble two">Good job! 🌟</div>
+      <div class="bubble three">Let's try together</div>
+      <div class="robot">
+        <div class="robot-body">
+          <div class="antenna"></div>
+          <div class="robot-ear l"></div>
+          <div class="robot-ear r"></div>
+          <div class="robot-face">
+            <div class="eye"></div>
+            <div class="eye"></div>
+          </div>
+          <div class="cheek l"></div>
+          <div class="cheek r"></div>
+        </div>
       </div>
     </div>
   </header>
 
-  <main>
+  <main class="wrap">
+    <!-- MISSION -->
     <section id="mission" class="reveal">
       <div class="section-heading">
-        <h2>Built around care, consistency, and confidence.</h2>
+        <span class="kicker">Our Mission</span>
+        <h2>Care, consistency, and confidence — built into every word.</h2>
         <p>
-          Our mission is simple: give children a safe and encouraging way to practice communication
-          more often, while supporting the parents, therapists, and researchers who help them grow.
+          We give children a safe, encouraging way to practice communication more often, while
+          supporting the parents, therapists, and researchers who help them grow.
         </p>
       </div>
-
       <div class="grid">
         <article class="card">
-          <span>1</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2e2a3d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
           <h3>Practice that feels safe</h3>
-          <p>Children can repeat sounds, words, rhythm, and tone without pressure or judgment.</p>
+          <p>Children repeat sounds, words, rhythm, and tone with no pressure and no judgment.</p>
         </article>
-
         <article class="card">
-          <span>2</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2e2a3d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+          </div>
           <h3>A bridge between sessions</h3>
-          <p>The goal is to reinforce therapy work at home, not replace the human care behind it.</p>
+          <p>The goal is to reinforce therapy work at home — never to replace the human care behind it.</p>
         </article>
-
         <article class="card">
-          <span>3</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2e2a3d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
           <h3>Progress worth celebrating</h3>
           <p>Every attempt matters. Every word is a step toward stronger communication.</p>
         </article>
       </div>
     </section>
 
+    <!-- PROBLEM -->
     <section id="problem" class="reveal">
-      <div class="section-heading">
-        <h2>The gap between sessions is where support can fade.</h2>
-        <p>
-          Speech therapy is powerful, but families may go days or weeks between appointments.
-          Together We Talk is designed for that in-between space: the quiet moments at home where
-          gentle repetition can help skills stick.
-        </p>
+      <div class="panel">
+        <div class="panel-copy">
+          <span class="kicker">The Gap</span>
+          <h2>The time between sessions is where support fades.</h2>
+          <p>
+            Therapy is powerful — but families often go days or weeks between appointments.
+            Together We Talk is designed for that quiet in-between, where gentle daily
+            repetition helps new skills truly stick.
+          </p>
+        </div>
+        <div class="timeline">
+          <div class="t-row">
+            <div class="t-dot">🗓️</div>
+            <div><strong>Monday — Therapy session</strong><span>Skills introduced &amp; practiced</span></div>
+          </div>
+          <div class="t-row gap">
+            <div class="t-dot">⏳</div>
+            <div><strong>Tue – Sun — The gap</strong><span>Where consistency usually slips away</span></div>
+          </div>
+          <div class="t-row">
+            <div class="t-dot">💬</div>
+            <div><strong>Every day — With a companion</strong><span>A few warm minutes of practice at home</span></div>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- IDEA -->
     <section id="idea" class="reveal">
-      <div class="section-heading">
-        <h2>A small companion for meaningful speech practice.</h2>
-        <p>
-          We are developing a friendly, stylish robot experience that uses AI to guide speech exercises,
-          model conversational rhythm, and make practice feel more natural in a child’s daily routine.
-        </p>
+      <div class="idea-split">
+        <div class="idea-art" aria-hidden="true">
+          <div class="ring a"></div>
+          <div class="ring b"></div>
+          <div class="mini-robot"></div>
+        </div>
+        <div>
+          <span class="kicker">The Companion</span>
+          <h2 style="font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.08;letter-spacing:-0.02em;">A small friend for meaningful speech practice.</h2>
+          <p style="color:var(--ink-soft);font-size:1.12rem;font-weight:500;margin-top:0.8rem;">
+            We're developing a friendly, approachable robot that uses AI to guide exercises,
+            model conversational rhythm, and make practice feel natural in a child's daily routine.
+          </p>
+          <ul class="feature-list">
+            <li><span class="check">✓</span><span><strong>Patient &amp; encouraging</strong> — it waits, listens, and celebrates every try.</span></li>
+            <li><span class="check">✓</span><span><strong>Designed for autism</strong> — predictable, calm, and sensory-friendly by design.</span></li>
+            <li><span class="check">✓</span><span><strong>Parent-aware</strong> — gives families simple ways to support without the guesswork.</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section id="demo" class="feature reveal">
-      <div class="feature-copy">
-        <div class="eyebrow">See the concept</div>
-        <h2>A glimpse of the idea in motion.</h2>
-        <p>
-          This short video shows the kind of warm, approachable experience we imagine: technology that
-          feels less like a tool and more like a patient practice partner.
-        </p>
-        <a class="button button-primary" href="https://www.youtube.com/shorts/XuWzyaehYO8" target="_blank" rel="noopener noreferrer">Open on YouTube</a>
-      </div>
-
-      <div class="video-shell">
-        <iframe
-          src="https://www.youtube.com/embed/XuWzyaehYO8"
-          title="Together We Talk concept video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
+    <!-- DEMO -->
+    <section id="demo" class="reveal">
+      <div class="demo">
+        <div>
+          <span class="kicker">See the concept</span>
+          <h2>A glimpse of the idea in motion.</h2>
+          <p>
+            This short video shows the warm, approachable experience we imagine — technology that
+            feels less like a tool and more like a patient practice partner.
+          </p>
+          <a class="button button-primary" href="https://youtube.com/shorts/XuWzyaehYO8?feature=share" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Open on YouTube
+          </a>
+        </div>
+        <div class="video-shell">
+          <iframe
+            src="https://www.youtube.com/embed/XuWzyaehYO8"
+            title="Together We Talk concept video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="contact reveal">
-      <h2>Let’s make communication more accessible.</h2>
-      <p>
-        Whether you are a parent, therapist, researcher, educator, or someone who believes in this mission,
-        we would love to hear from you.
-      </p>
-      <a href="mailto:harrisongray@togetherwetalk.org" class="button button-primary">Get in touch</a>
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <div class="contact">
+        <h2>Let's make communication more accessible.</h2>
+        <p>
+          Whether you're a parent, therapist, researcher, educator, or simply someone who
+          believes in this mission — we'd love to hear from you.
+        </p>
+        <a href="mailto:harrisongray@togetherwetalk.org" class="button button-primary">Get in touch →</a>
+      </div>
     </section>
   </main>
 
   <footer>
-    &copy; 2026 Together We Talk. Built with care for children, families, and the people who support them.
+    <a class="brand" href="#top">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </span>
+      Together We Talk
+    </a>
+    <div>&copy; 2026 Together We Talk · Built with care for children, families, and the people who support them.</div>
   </footer>
 
   <script>
-    const revealElements = document.querySelectorAll('.reveal');
-
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('visible');
         revealObserver.unobserve(entry.target);
       });
-    }, { threshold: 0.16 });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
-    revealElements.forEach((element) => revealObserver.observe(element));
+    // subtle parallax on the companion following the cursor
+    const robot = document.querySelector('.robot');
+    const stage = document.querySelector('.companion-stage');
+    if (stage && robot && window.matchMedia('(pointer:fine)').matches) {
+      stage.addEventListener('mousemove', (e) => {
+        const r = stage.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) / r.width;
+        const y = (e.clientY - r.top - r.height / 2) / r.height;
+        robot.style.transform = `translate(${x * 16}px, ${y * 16}px)`;
+      });
+      stage.addEventListener('mouseleave', () => { robot.style.transform = ''; });
+    }
   </script>
 </body>
 </html>
