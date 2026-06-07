@@ -244,6 +244,7 @@
       min-height: 460px;
       display: grid;
       place-items: center;
+      overflow: hidden;
     }
     .blob {
       position: absolute;
@@ -257,6 +258,12 @@
     @keyframes morph {
       0%, 100% { border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; transform: rotate(0deg); }
       50% { border-radius: 58% 42% 44% 56% / 46% 58% 42% 54%; transform: rotate(8deg); }
+    }
+    .robot-scene {
+      position: relative;
+      width: 240px;
+      display: flex;
+      justify-content: center;
     }
     .robot {
       position: relative;
@@ -328,8 +335,8 @@
     }
     /* EYES: warm friendly arcs (the twist — caring, not cold) */
     .eye {
-      width: 16px; height: 34px;
-      border-radius: 12px;
+      width: 26px; height: 26px;
+      border-radius: 50%;
       background: var(--sun);
       box-shadow: 0 0 12px rgba(240, 201, 107, 0.95), 0 0 22px rgba(240, 201, 107, 0.5);
       transform: rotate(10deg);
@@ -410,9 +417,9 @@
       background: var(--dot, var(--coral-deep));
       box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
     }
-    .bubble.one { top: 8%; left: -8%; --dot: var(--coral-deep); animation: floatB 4.5s ease-in-out infinite; }
-    .bubble.two { top: 42%; right: -12%; --dot: var(--sky-deep); animation: floatB 5.5s ease-in-out infinite 0.6s; }
-    .bubble.three { bottom: 4%; left: -2%; --dot: var(--teal-deep); animation: floatB 5s ease-in-out infinite 1.2s; }
+    .bubble.one { top: 24px; left: -44px; --dot: var(--coral-deep); animation: floatB 4.5s ease-in-out infinite; }
+    .bubble.two { top: 140px; right: -54px; --dot: var(--sky-deep); animation: floatB 5.5s ease-in-out infinite 0.6s; }
+    .bubble.three { bottom: 18px; left: -36px; --dot: var(--teal-deep); animation: floatB 5s ease-in-out infinite 1.2s; }
     @keyframes floatB {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -553,7 +560,7 @@
       display: flex; align-items: center; justify-content: center; gap: 11px;
     }
     .idea-art .mini-visor .me {
-      width: 9px; height: 19px; border-radius: 7px;
+      width: 16px; height: 16px; border-radius: 50%;
       background: var(--sun);
       box-shadow: 0 0 8px rgba(240,201,107,0.95);
     }
@@ -721,13 +728,19 @@
       .trust { justify-content: center; margin-top: 1.6rem; font-size: 0.85rem; }
 
       /* companion: smaller, calmer, fewer floating bits */
-      .companion-stage { min-height: 300px; }
+      .companion-stage { min-height: 300px; overflow: hidden; }
       .blob { width: 290px; height: 290px; opacity: 0.45; }
+      .robot-scene { width: 100%; }
       .robot { transform: scale(0.82); }
       .bubble.two { display: none; } /* reduce clutter */
-      .bubble { font-size: 0.78rem; padding: 0.4rem 0.75rem 0.4rem 0.6rem; }
-      .bubble.one { top: 2%; left: -2%; }
-      .bubble.three { bottom: 4%; left: -2%; }
+      .bubble {
+        font-size: 0.74rem;
+        padding: 0.36rem 0.7rem 0.36rem 0.55rem;
+        max-width: 44%;
+        white-space: normal;
+      }
+      .bubble.one { top: 18px; left: 4%; right: auto; }
+      .bubble.three { bottom: 18px; right: 4%; left: auto; }
 
       /* sections: more air, flatter and cleaner surfaces */
       section { padding: 2.4rem 0; }
@@ -839,17 +852,19 @@
 
     <div class="companion-stage reveal" aria-label="Friendly robot companion">
       <div class="blob"></div>
-      <div class="bubble one">"Aaa"</div>
-      <div class="bubble two">Great job!</div>
-      <div class="bubble three">Let's try together</div>
-      <div class="robot">
-        <div class="robot-head">
-          <div class="visor">
-            <div class="eye l"></div>
-            <div class="eye r"></div>
+      <div class="robot-scene">
+        <div class="bubble one">"Aaa"</div>
+        <div class="bubble two">Great job!</div>
+        <div class="bubble three">Let's try together</div>
+        <div class="robot">
+          <div class="robot-head">
+            <div class="visor">
+              <div class="eye l"></div>
+              <div class="eye r"></div>
+            </div>
           </div>
+          <div class="robot-body"></div>
         </div>
-        <div class="robot-body"></div>
       </div>
     </div>
   </header>
